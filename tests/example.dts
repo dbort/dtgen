@@ -1,0 +1,66 @@
+/dts-v1/;
+
+// https://github.com/dgibson/dtc/blob/main/Documentation/dts-format.txt
+
+/ {
+    gpio_pins {
+        gpio0: GPIO0 {
+            index = <0>;
+        };
+
+        gpio1: GPIO1 {
+            index = <1>;
+        };
+
+        gpio2: GPIO2 {
+            index = <2>;
+        };
+
+        gpio3: GPIO3 {
+            index = <3>;
+        };
+    };
+
+    board_signals {
+        signal1: INPUT_SIGNAL_1 {
+            gpio = <&gpio0>;
+            direction = "input";
+            pull = "up";
+            interrupt = "true";
+            interrupt_active = "high";
+        };
+        signal2: INPUT_SIGNAL_2 {
+            gpio = <&gpio1>;
+            direction = "input";
+            pull = "down";
+            interrupt = "false";
+        };
+        signal3: OUTPUT_SIGNAL_1 {
+            gpio = <&gpio2>;
+            direction = "output";
+            default_value = "high";
+            drive_strength = "high";
+        };
+        signal4: OUTPUT_SIGNAL_2 {
+            gpio = <&gpio3>;
+            direction = "output";
+            default_value = "low";
+            drive_strength = "default";
+        };
+    };
+
+    i2c_devices {
+        audio_amp: AUDIO_AMP {
+            bus = <0>;
+            address = <0x45>;
+        };
+        led_controller: LED_CONTROLLER {
+            bus = <2>;
+            address = <0x12>;
+        };
+        battery_temp: BATTERY_TEMP {
+            bus = <5>;
+            address = <0x5A>;
+        };
+    };
+};
